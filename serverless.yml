@@ -1,0 +1,50 @@
+org: iagor
+app: mimoo-ps
+service: mimoo-ps-test
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  memorySize: 128
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:DeleteItem
+        - dynamodb:UpdateItem
+      Resource: arn:aws:dynamodb:::*
+
+functions:
+  healthcheck:
+    handler: healthcheck.handler
+    description: Healthcheck to ensure the service is up
+    events:
+      - http:
+          path: healthcheck
+          method: get
+          cors: true
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-stack-output
+
+resources:
+  Outputs:
+    ApiUrl:
+      Description: "The API Gateway URL"
+      Value:
+        Fn::Join:
+          - ""
+          - - "https://"
+            - Ref: ApiGatewayRestApi
+            - ".execute-api.${self:provider.region}.amazonaws.com/${self:provider.stage}"
+
+custom:
+  output:
+    file: .serverless/output.json
+  stage: ${opt:stage, 'dev'}
