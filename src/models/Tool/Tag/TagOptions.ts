@@ -1,0 +1,20 @@
+enum TagOptions {
+  ORGANIZATION,
+  PLANNING,
+  COLLABORATION,
+  WRITING,
+  CALENDAR,
+  API,
+  JSON,
+  SCHEMA,
+  NODE,
+  GITHUB,
+  REST,
+  WEB,
+  FRAMEWORK,
+  HTTP2,
+  HTTPS,
+  LOCALHOST
+}
+
+export default TagOptions
