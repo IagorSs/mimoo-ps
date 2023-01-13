@@ -9,15 +9,17 @@ provider:
   memorySize: 128
   region: us-east-1
   stage: ${opt:stage, 'dev'}
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:PutItem
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:DeleteItem
-        - dynamodb:UpdateItem
-      Resource: arn:aws:dynamodb:::*
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:DeleteItem
+            - dynamodb:UpdateItem
+          Resource: arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.DynamoDBTableName}
 
 functions:
   healthcheck:
@@ -45,12 +47,25 @@ resources:
           - - "https://"
             - Ref: ApiGatewayRestApi
             - ".execute-api.${self:provider.region}.amazonaws.com/${self:provider.stage}"
+  Resources:
+    dynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: N
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.DynamoDBTableName}
 
 custom:
   tscpaths:
     core: "@core"
   output:
     file: .serverless/output.json
+  DynamoDBTableName: ${self:service}-${self:provider.stage}
   stage: ${opt:stage, 'dev'}
 
 package:
