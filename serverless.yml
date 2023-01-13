@@ -32,7 +32,9 @@ functions:
 plugins:
   - serverless-plugin-typescript
   - serverless-stack-output
-
+  - serverless-tscpaths
+  - serverless-plugin-common-excludes
+  - serverless-plugin-include-dependencies
 resources:
   Outputs:
     ApiUrl:
@@ -45,6 +47,12 @@ resources:
             - ".execute-api.${self:provider.region}.amazonaws.com/${self:provider.stage}"
 
 custom:
+  tscpaths:
+    core: "@core"
   output:
     file: .serverless/output.json
   stage: ${opt:stage, 'dev'}
+
+package:
+  patterns:
+    - core
