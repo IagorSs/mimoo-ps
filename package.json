@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@middy/core": "^4.1.0",
-    "aws-sdk": "^2.1293.0"
+    "aws-sdk": "^2.1293.0",
+    "serverless": "^3.26.0"
   }
 }
