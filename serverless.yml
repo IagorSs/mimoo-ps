@@ -21,7 +21,7 @@ provider:
 
 functions:
   healthcheck:
-    handler: src/routes/healthcheck/index.handler
+    handler: src/Healthcheck/routes/get/index.handler
     description: Healthcheck to ensure the service is up
     events:
       - http:

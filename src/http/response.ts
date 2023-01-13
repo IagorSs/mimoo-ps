@@ -1,5 +1,5 @@
-export interface HttpResponse {
+export default interface HttpResponse {
   statusCode: number
   body?: string
-  headers?: any
+  headers?: Record<string, string>
 };
