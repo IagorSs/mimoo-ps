@@ -1,6 +1,6 @@
 import middy from '@middy/core'
 import { ToolRepository, Mappers } from '@core/Tool'
-import { checkEnv, errorHandler } from '../middlewares'
+import { checkEnv, errorHandler } from '@core/middlewares'
 import { Response, HttpResponse, Body } from '@core/http'
 
 const getAllTools = async (): Promise<HttpResponse> => {
