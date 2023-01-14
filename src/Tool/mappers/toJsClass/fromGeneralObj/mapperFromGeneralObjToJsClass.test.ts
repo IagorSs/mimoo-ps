@@ -2,7 +2,7 @@ import mapper from '.'
 import { ToolObj, Tool, URL, Tag } from '@core/Tool'
 
 it('should mapper convert as expected', () => {
-  const dbObj: ToolObj = {
+  const obj: ToolObj = {
     description: 'description test',
     id: 34,
     link: 'https://google.com',
@@ -23,5 +23,5 @@ it('should mapper convert as expected', () => {
     title: 'Google'
   }, 34)
 
-  expect(mapper(dbObj)).toEqual(jsObjExpected)
+  expect(mapper(obj)).toEqual(jsObjExpected)
 })
