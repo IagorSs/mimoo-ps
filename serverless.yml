@@ -37,6 +37,8 @@ plugins:
   - serverless-tscpaths
   - serverless-plugin-common-excludes
   - serverless-plugin-include-dependencies
+  - serverless-dynamodb-local
+  - serverless-offline
 resources:
   Outputs:
     ApiUrl:
@@ -67,6 +69,15 @@ custom:
     file: .serverless/output.json
   DynamoDBTableName: ${self:service}-${self:provider.stage}
   stage: ${opt:stage, 'dev'}
+  serverless-offline:
+    httpPort: 2355
+  dynamodb:
+    start:
+      port: 6577
+      inMemory: true
+      migrate: true
+    stages:
+      - ${self:provider.stage}
 
 package:
   patterns:
