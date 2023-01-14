@@ -6,7 +6,7 @@ interface ResponseProps {
   headers?: Record<string, string> // TODO create object value for this
 }
 
-interface HttpResponse extends Omit<ResponseProps, 'body'> {
+export interface HttpResponse extends Omit<ResponseProps, 'body'> {
   body?: string
 }
 
