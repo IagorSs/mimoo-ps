@@ -30,6 +30,16 @@ functions:
           path: healthcheck
           method: get
           cors: true
+  get-tools:
+    handler: src/Tool/routes/get-all/index.handler
+    description: Get all tools
+    events:
+      - http:
+          path: tools
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: ${self:custom.DynamoDBTableName}
 
 plugins:
   - serverless-plugin-typescript
