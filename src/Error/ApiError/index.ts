@@ -4,7 +4,8 @@ export interface ApiErrorProps {
 }
 
 export default class ApiError extends Error {
-  httpStatusCodeError: number
+  readonly httpStatusCodeError: number
+  readonly API_ERROR: boolean = true
 
   constructor (props: ApiErrorProps) {
     if (props.httpStatusCodeError < 400) throw new Error('Error status code cannot be less than 400')
