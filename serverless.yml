@@ -40,6 +40,16 @@ functions:
           cors: true
     environment:
       TABLE_NAME: ${self:custom.DynamoDBTableName}
+  create-tool:
+    handler: src/Tool/routes/create/index.handler
+    description: Create tool
+    events:
+      - http:
+          path: tools
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: ${self:custom.DynamoDBTableName}
 
 plugins:
   - serverless-plugin-typescript
