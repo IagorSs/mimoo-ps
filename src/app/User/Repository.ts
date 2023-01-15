@@ -54,3 +54,19 @@ export const registerUser = async (user: User): Promise<any> => {
     throw error
   }
 }
+
+export const login = async (user: User): Promise<string> => {
+  const params = {
+    ...getDefaultParams(),
+    AuthFlow: 'ADMIN_NO_SRP_AUTH',
+    ClientId: process.env.CLIENT_ID as string,
+    AuthParameters: {
+      USERNAME: user.email,
+      PASSWORD: user.password
+    }
+  }
+
+  const responseInitiateAuth = await client.adminInitiateAuth(params).promise()
+
+  return responseInitiateAuth.AuthenticationResult?.IdToken as string
+}

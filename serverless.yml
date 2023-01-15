@@ -37,6 +37,17 @@ functions:
           path: healthcheck
           method: get
           cors: true
+  login:
+    handler: "src/app/User/routes/login/index.handler"
+    description: Login on App
+    events:
+      - http:
+          path: user/login
+          method: post
+          cors: true
+    environment:
+      USER_POOL_ID: { Ref: UserPool }
+      CLIENT_ID: { Ref: UserClient }
   register:
     handler: "src/app/User/routes/register/index.handler"
     description: Create user on App
