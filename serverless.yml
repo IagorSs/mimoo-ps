@@ -25,6 +25,7 @@ provider:
             - cognito-idp:AdminInitiateAuth
             - cognito-idp:AdminCreateUser
             - cognito-idp:AdminSetUserPassword
+            - cognito-idp:AdminDeleteUser
           Resource: "*"
 
 functions:
@@ -36,6 +37,16 @@ functions:
           path: healthcheck
           method: get
           cors: true
+  register:
+    handler: "src/app/User/routes/register/index.handler"
+    description: Create user on App
+    events:
+      - http:
+          path: user/register
+          method: post
+          cors: true
+    environment:
+      USER_POOL_ID: { Ref: UserPool }
   get-tools:
     handler: "src/app/Tool/routes/get/index.handler"
     description: Get all tools
