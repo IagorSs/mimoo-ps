@@ -1,6 +1,6 @@
 import Body from './Body'
 
-interface ResponseProps {
+export interface ResponseProps {
   statusCode: number
   body?: Body
   headers?: Record<string, string> // TODO create object value for this
