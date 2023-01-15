@@ -6,7 +6,7 @@ import filterByTag from './filter-by-tag'
 
 // TODO better this event type
 const getAllTools = async (event: any): Promise<HttpResponse> => {
-  const tagToFilter = event.queryStringParameters?.tag
+  const tagToFilter = event.queryStringParameters?.tag.toUpperCase()
 
   let tools = await ToolRepository.getAll()
 
