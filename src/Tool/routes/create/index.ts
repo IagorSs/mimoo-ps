@@ -1,7 +1,7 @@
 import middy from '@middy/core'
 import { Mappers, ToolObj, ToolRepository } from '@core/Tool'
 import { errorHandler, checkEnv } from '@core/middlewares'
-import { HttpResponse, Response } from '@core/http'
+import { HttpResponse, Response, Body } from '@core/http'
 
 // TODO better this performance
 const getNewId = async (): Promise<number> => {
@@ -22,14 +22,19 @@ const createTool = async (event: any): Promise<HttpResponse> => {
   // TODO put this parse, check and treatment of body on middleware
   const body: ToolObj = JSON.parse(event.body)
 
-  await ToolRepository.create(Mappers.fromGeneralObjToJsClass({
+  const toolId = await getNewId()
+
+  const tool = Mappers.fromGeneralObjToJsClass({
     ...body,
     tags: body.tags.map(tag => tag.toUpperCase()),
-    id: await getNewId()
-  }))
+    id: toolId
+  })
+
+  await ToolRepository.create(tool)
 
   const res = new Response({
-    statusCode: 201
+    statusCode: 201,
+    body: new Body(Mappers.fromJsClassToGeneralObj(tool))
   })
 
   return res.getValue()
