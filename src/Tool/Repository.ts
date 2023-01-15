@@ -30,3 +30,14 @@ export const create = async (tool: Tool): Promise<void> => {
 
   await client.put(params).promise()
 }
+
+export const deleteTool = async (toolId: number): Promise<void> => {
+  const params = {
+    ...getDefaultParams(),
+    Key: {
+      id: toolId
+    }
+  }
+
+  await client.delete(params).promise()
+}

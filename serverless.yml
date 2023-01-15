@@ -50,6 +50,20 @@ functions:
           cors: true
     environment:
       TABLE_NAME: ${self:custom.DynamoDBTableName}
+  delete-tool:
+    handler: src/Tool/routes/delete/index.handler
+    description: Delete tool
+    events:
+      - http:
+          path: tools/{id}
+          method: delete
+          cors: true
+          request:
+            parameters:
+              paths:
+                id: true
+    environment:
+      TABLE_NAME: ${self:custom.DynamoDBTableName}
 
 plugins:
   - serverless-plugin-typescript
