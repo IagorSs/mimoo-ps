@@ -12,17 +12,26 @@ type PossibleErrors = ApiError | Error | AwsError
 export default (): middy.MiddlewareObj<APIGatewayProxyEvent, APIGatewayProxyResult> => {
   const treatAwsError = (awsError: AwsError): Response => {
     const responseProps: ResponseProps = {
-      statusCode: 500,
-      body: new Body(`Error creating user - ${awsError.message}`)
+      statusCode: 500
     }
 
     switch (awsError.code) {
       case 'UsernameExistsException':
         responseProps.statusCode = 409
+        responseProps.body = new Body(`Error creating user - ${awsError.message}`)
         break
       case 'InvalidParameterException':
       case 'InvalidPasswordException':
         responseProps.statusCode = 400
+        responseProps.body = new Body(`Error creating user - ${awsError.message}`)
+        break
+      case 'NotAuthorizedException':
+        responseProps.statusCode = 401
+        responseProps.body = new Body(`Error login user - ${awsError.message}`)
+        break
+      case 'UserNotFoundException':
+        responseProps.statusCode = 404
+        responseProps.body = new Body(`Error login user - ${awsError.message}`)
         break
     }
 
