@@ -1,9 +1,14 @@
 import { HttpResponse, Response } from '@core/http'
+import { errorHandler } from '@core/middlewares'
+import middy from '@middy/core'
 
-export async function handler (): Promise<HttpResponse> {
+const notFound = async (): Promise<HttpResponse> => {
   const response = new Response({
     statusCode: 200
   })
 
   return response.getValue()
 }
+
+export const handler = middy(notFound)
+  .use(errorHandler())
