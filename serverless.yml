@@ -44,6 +44,15 @@ functions:
           path: tools
           method: get
           cors: true
+          authorizer:
+            name: PrivateAuthorizer
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - UserPool
+                - Arn
+            claims:
+              - email
     environment:
       TABLE_NAME: ${self:custom.DynamoDBTableName}
   create-tool:
@@ -54,6 +63,15 @@ functions:
           path: tools
           method: post
           cors: true
+          authorizer:
+            name: PrivateAuthorizer
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - UserPool
+                - Arn
+            claims:
+              - email
     environment:
       TABLE_NAME: ${self:custom.DynamoDBTableName}
   delete-tool:
@@ -64,6 +82,15 @@ functions:
           path: tools/{id}
           method: delete
           cors: true
+          authorizer:
+            name: PrivateAuthorizer
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - UserPool
+                - Arn
+            claims:
+              - email
           request:
             parameters:
               paths:
