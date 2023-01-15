@@ -16,26 +16,12 @@ export const getAll = async (): Promise<Tool[]> => {
   })
 }
 
-// TODO better this performance
-const getNewId = async (): Promise<number> => {
-  const tools = await getAll()
-
-  return 1 + (tools
-    .reduce(
-      (previousTool, currentTool) =>
-        (previousTool.id as number) > (currentTool.id as number)
-          ? previousTool
-          : currentTool
-    )
-    .id as number)
-}
-
 export const create = async (tool: Tool): Promise<void> => {
   const params = {
     ...getDefaultParams(),
     Item: {
       tags: client.createSet(tool.tags.map(tag => tag.get())),
-      id: await getNewId(),
+      id: tool.id,
       link: tool.link.get(),
       description: tool.description,
       title: tool.title
