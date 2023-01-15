@@ -31,7 +31,7 @@ functions:
           method: get
           cors: true
   get-tools:
-    handler: src/Tool/routes/get-all/index.handler
+    handler: src/Tool/routes/get/index.handler
     description: Get all tools
     events:
       - http:
