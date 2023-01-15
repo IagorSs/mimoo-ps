@@ -1,10 +1,16 @@
 import middy from '@middy/core'
-import { ToolRepository, Mappers } from '@core/Tool'
+import { ToolRepository, Mappers, Tag } from '@core/Tool'
 import { checkEnv, errorHandler } from '@core/middlewares'
 import { Response, HttpResponse, Body } from '@core/http'
+import filterByTag from './filter-by-tag'
 
-const getAllTools = async (): Promise<HttpResponse> => {
-  const tools = await ToolRepository.getAll()
+// TODO better this event type
+const getAllTools = async (event: any): Promise<HttpResponse> => {
+  const tagToFilter = event.queryStringParameters?.tag
+
+  let tools = await ToolRepository.getAll()
+
+  if (tagToFilter !== undefined) tools = filterByTag(new Tag(tagToFilter), tools)
 
   const response = new Response({
     statusCode: 200,
