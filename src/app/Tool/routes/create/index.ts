@@ -1,5 +1,5 @@
 import middy from '@middy/core'
-import { Mappers, ToolObj, ToolRepository } from '@core/Tool'
+import { Mappers, ToolObj, ToolRepository } from '@app/Tool'
 import { errorHandler, checkEnv } from '@core/middlewares'
 import { HttpResponse, Response, Body } from '@core/http'
 

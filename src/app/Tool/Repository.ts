@@ -1,5 +1,5 @@
-import { Tool, Mappers, ToolDbObj } from '@core/Tool'
-import { client } from '../database'
+import { Tool, Mappers, ToolDbObj } from '.'
+import { client } from '@core/database'
 
 const getDefaultParams = (): any => ({
   TableName: process.env.TABLE_NAME as string

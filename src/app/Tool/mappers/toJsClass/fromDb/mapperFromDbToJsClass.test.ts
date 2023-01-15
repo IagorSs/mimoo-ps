@@ -1,15 +1,17 @@
 import mapper from '.'
-import { ToolObj, Tool, URL, Tag } from '@core/Tool'
+import { ToolDbObj, Tool, URL, Tag } from '@app/Tool'
 
 it('should mapper convert as expected', () => {
-  const obj: ToolObj = {
+  const dbObj: ToolDbObj = {
     description: 'description test',
     id: 34,
     link: 'https://google.com',
-    tags: [
-      'COLLABORATION',
-      'PLANNING'
-    ],
+    tags: {
+      values: [
+        'COLLABORATION',
+        'PLANNING'
+      ]
+    },
     title: 'Google'
   }
 
@@ -23,5 +25,5 @@ it('should mapper convert as expected', () => {
     title: 'Google'
   }, 34)
 
-  expect(mapper(obj)).toEqual(jsObjExpected)
+  expect(mapper(dbObj)).toEqual(jsObjExpected)
 })

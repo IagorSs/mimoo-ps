@@ -1,4 +1,4 @@
-import { Tool, Tag, URL, ToolObj } from '@core/Tool'
+import { Tool, Tag, URL, ToolObj } from '@app/Tool'
 
 export default (toolObj: ToolObj): Tool => {
   return new Tool({

@@ -23,7 +23,7 @@ provider:
 
 functions:
   healthcheck:
-    handler: src/Healthcheck/routes/get/index.handler
+    handler: "src/app/Healthcheck/routes/get/index.handler"
     description: Healthcheck to ensure the service is up
     events:
       - http:
@@ -31,7 +31,7 @@ functions:
           method: get
           cors: true
   get-tools:
-    handler: src/Tool/routes/get/index.handler
+    handler: "src/app/Tool/routes/get/index.handler"
     description: Get all tools
     events:
       - http:
@@ -41,7 +41,7 @@ functions:
     environment:
       TABLE_NAME: ${self:custom.DynamoDBTableName}
   create-tool:
-    handler: src/Tool/routes/create/index.handler
+    handler: "src/app/Tool/routes/create/index.handler"
     description: Create tool
     events:
       - http:
@@ -51,7 +51,7 @@ functions:
     environment:
       TABLE_NAME: ${self:custom.DynamoDBTableName}
   delete-tool:
-    handler: src/Tool/routes/delete/index.handler
+    handler: "src/app/Tool/routes/delete/index.handler"
     description: Delete tool
     events:
       - http:
@@ -99,6 +99,7 @@ resources:
 custom:
   tscpaths:
     core: "@core"
+    app: "@app"
   output:
     file: .serverless/output.json
   DynamoDBTableName: ${self:service}-${self:provider.stage}
@@ -116,3 +117,4 @@ custom:
 package:
   patterns:
     - core
+    - app

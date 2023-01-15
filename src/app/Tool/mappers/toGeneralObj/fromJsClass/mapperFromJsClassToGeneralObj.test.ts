@@ -1,5 +1,5 @@
 import mapper from '.'
-import { ToolObj, Tool, URL, Tag } from '@core/Tool'
+import { ToolObj, Tool, URL, Tag } from '@app/Tool'
 
 it('should mapper convert as expected', () => {
   const jsObj: Tool = new Tool({

@@ -1,5 +1,5 @@
 import middy from '@middy/core'
-import { ToolRepository, Mappers, Tag } from '@core/Tool'
+import { ToolRepository, Mappers, Tag } from '@app/Tool'
 import { checkEnv, errorHandler } from '@core/middlewares'
 import { Response, HttpResponse, Body } from '@core/http'
 import filterByTag from './filter-by-tag'

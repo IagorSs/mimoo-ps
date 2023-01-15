@@ -11,7 +11,8 @@
 		"noImplicitAny": true,
 		"esModuleInterop": true,
 		"paths": {
-			"@core/*": ["src/*"]
+			"@core/*": ["src/*"],
+			"@app/*": ["src/app/*"]
 		},
 		"baseUrl": "./",
 		"resolveJsonModule": true

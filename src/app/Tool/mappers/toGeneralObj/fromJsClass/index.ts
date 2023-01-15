@@ -1,4 +1,4 @@
-import { Tool, ToolObj } from '@core/Tool'
+import { Tool, ToolObj } from '@app/Tool'
 
 export default (tool: Tool): ToolObj => {
   return {
