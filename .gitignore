@@ -3,5 +3,6 @@ node_modules
 
 .serverless
 .dynamodb
+swagger/*
 
 package-lock.json

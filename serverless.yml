@@ -128,6 +128,7 @@ plugins:
   - serverless-plugin-include-dependencies
   - serverless-dynamodb-local
   - serverless-offline
+  - serverless-auto-swagger
 resources:
   Outputs:
     ApiUrl:

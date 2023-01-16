@@ -15,6 +15,7 @@
 			"@app/*": ["src/app/*"]
 		},
 		"baseUrl": "./",
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"allowJs": true
 	}
 }
