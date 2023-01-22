@@ -1,4 +1,4 @@
-import { Tool, URL, Tag } from '@core/Tool'
+import { Tool, URL, Tag } from '@app/Tool'
 import filterbyTag from '.'
 
 it('should filter tag correctly', () => {

@@ -6,3 +6,5 @@ node_modules
 swagger/*
 
 package-lock.json
+
+coverage/*
